@@ -19,6 +19,7 @@ Analysing the performances of different state of the art code generation models 
     ```
 
 2. When Python (Conda) **virtual environment is activated**, install dependencies (using Pytorch with GPU support)
+    NOTE: This was done in the mlp virtual environment
 
     ```bash
     conda install pytorch torchvision cudatoolkit=11.3 -c pytorch
