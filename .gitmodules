@@ -1,3 +1,6 @@
 [submodule "CodeT5"]
 	path = CodeT5
 	url = https://github.com/KareemAlaa2001/CodeT5.git
+[submodule "MLP-CodeT5"]
+	path = MLP-CodeT5
+	url = git@github.com:allc/MLP-CodeT5.git
