@@ -7,10 +7,9 @@ Analysing the performances of different state of the art code generation models 
 ## CodeContests
 
 ### Adding new script to access the data
-Each new script must be added to the BUILD file in order to be added to the Bazel workspace. Follow how print_names.and_sources.py is added into that file by analogy.
+Each new script must be added to the BUILD file in order to be added to the Bazel workspace. Follow how print_names.and_sources.py is added into that file for analogy.
 
 ### Properties of each problem datapoint
-
 First extract each "problem" datapoint analogically to how done in "print_names_and_sources.py". Then access via "problem.____" inside of the "print_names_and_sources.py" script.
 
 * .name
@@ -18,14 +17,22 @@ First extract each "problem" datapoint analogically to how done in "print_names_
 * .source
 * .difficulty
 * .public_tests (includes input and output – access via .public_tests[0].input or public_tests[0].output. Note max "n" is 0 here)
+* .private_tests (same as public_tests)
+* .generated_tests (many, each with .input and .output) 
 * .solutions (many separate ones, each includes .language and .solution – access via .solutions[n].language or .solutions[n].solution. Note "n" is the amount of solutions for each problem in this case)
+* .incorrect_solutions (many, each with .language and .solution)
 * .cf_contest_id
 * .cf_index
 * .cf_rating
 * .cf_tags (couple of separate ones)
-* .generated_tests (many, each with .input and .output) 
-* .incorrect_solutions (many, each with .language and .solution)
 
+The contest_problem.proto file illustrates an example of this structure. Also you can use it to look up the encoding for certain parameters (e.g. source – CODECHEF is .source = 1, CODEFORCES is .source = 2, EASY .difficulty = 1 whilst HARD .difficulty = 3, etc.)
+
+
+### Understanding the tests
+Each problem has input and output values of different types and different sizes. The tests are just different input values matching that problem description format (as specified in the .description) and output values that the solution script should give (in the same format as given in .description).
+
+So to perform a test, run each solution on the test's input, and check if it matches the test's output value.
 
 ## CodeT5
 
