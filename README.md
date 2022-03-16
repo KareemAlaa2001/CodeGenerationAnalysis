@@ -10,7 +10,27 @@ Analysing the performances of different state of the art code generation models 
 Each new script must be added to the BUILD file in order to be added to the Bazel workspace. Follow how print_names.and_sources.py is added into that file for analogy.
 
 ### Properties of each problem datapoint
-First extract each "problem" datapoint analogically to how done in "print_names_and_sources.py". Then access via "problem.____" inside of the "print_names_and_sources.py" script.
+First extract each "problem" datapoint ("messages" from the contest_problem.proto file) using the Riegelli Record Reader. Then access via "problem.____" inside of your script. The only piece of code needed is:
+
+```python
+import io
+import sys
+import riegeli
+import contest_problem_pb2
+
+def _all_problems(filenames):
+  """Iterates through all ContestProblems in filenames."""
+  for filename in filenames:
+    reader = riegeli.RecordReader(io.FileIO(filename, mode='rb'),)
+    for problem in reader.read_messages(contest_problem_pb2.ContestProblem):
+      yield problem
+
+def _print_data(filenames):
+  for problem in _all_problems(filenames):
+    ...
+    """Print the problem data you want here using print(problem.____)"""
+```
+
 
 * .name
 * .description
@@ -26,13 +46,13 @@ First extract each "problem" datapoint analogically to how done in "print_names_
 * .cf_rating
 * .cf_tags (couple of separate ones)
 
-The contest_problem.proto file illustrates an example of this structure. Also you can use it to look up the encoding for certain parameters (e.g. source – CODECHEF is .source = 1, CODEFORCES is .source = 2, EASY .difficulty = 1 whilst HARD .difficulty = 3, etc.)
+The contest_problem.proto file outlines the structure of the problem datapoint further. Also you can use it to look up the encoding for certain parameters (e.g. source – CODECHEF is .source = 1, CODEFORCES is .source = 2, EASY .difficulty = 1 whilst HARD .difficulty = 3, etc.)
 
+### Understanding the "tests" and "solutions"
+Each problem has input and output values of different types and different sizes – this is always specified in the problem .description text. The tests are just different input values matching that problem description format (as specified in the .description) and output values that the solution script should give (in the same format as given in .description).
 
-### Understanding the tests
-Each problem has input and output values of different types and different sizes. The tests are just different input values matching that problem description format (as specified in the .description) and output values that the solution script should give (in the same format as given in .description).
+So to perform a given "test", run each generated code on the input provided by that test, and check if it matches the output value provided by that test. The "solutions" provided in the dataset are the code solutions to the problems submitted by humans (the dataset contains both .solutions and .incorrect_solutions separately, see section above).
 
-So to perform a test, run each solution on the test's input, and check if it matches the test's output value.
 
 ## CodeT5
 
