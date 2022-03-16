@@ -52,6 +52,8 @@ The contest_problem.proto file outlines the structure of the problem datapoint f
 Each problem has input and output values of different types and different sizes – this is always specified in the problem .description text. The tests are just different input values matching that problem description format (as specified in the .description) and output values that the solution script should give (in the same format as given in .description).
 
 So to perform a given "test", run each generated code on the input provided by that test, and check if it matches the output value provided by that test. The "solutions" provided in the dataset are the code solutions to the problems submitted by humans (the dataset contains both .solutions and .incorrect_solutions separately, see section above).
+Looking at the dataset, the riegeli files are the output of the proto2 serialisation spec file "contest_problem.proto". [Here is a nice page to get you started with proto2](https://developers.google.com/protocol-buffers/docs/pythontutorial)
+
 
 
 ## CodeT5
