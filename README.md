@@ -62,10 +62,6 @@ So to perform a given "test", run each generated code on the input provided by t
 
 **Use the [modified code in submodule](https://github.com/allc/MLP-CodeT5/tree/modified)** for easier experiment setup
 
-    ```bash
-    git clone git@github.com:salesforce/CodeT5.git
-    ```
-
 2. When Python (Conda) **virtual environment is activated**, install dependencies (using Pytorch with GPU support)
     NOTE: This was done in the mlp virtual environment
 
