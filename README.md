@@ -29,6 +29,9 @@ def _print_data(filenames):
   for problem in _all_problems(filenames):
     ...
     """Print the problem data you want here using print(problem.____)"""
+
+if __name__ == '__main__':
+  _print_data(sys.argv[1:])
 ```
 
 
