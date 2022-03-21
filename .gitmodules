@@ -4,6 +4,3 @@
 [submodule "MLP-CodeT5"]
 	path = MLP-CodeT5
 	url = git@github.com:allc/MLP-CodeT5.git
-[submodule "CodeContests/code_contests"]
-	path = CodeContests/code_contests
-	url = https://github.com/KareemAlaa2001/code_contests.git
