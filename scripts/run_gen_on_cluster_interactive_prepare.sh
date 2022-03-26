@@ -21,10 +21,11 @@ cp ${CODET5_CODE} .
 tar -zxf MLP-CodeT5.tar.gz
 cd MLP-CodeT5
 
-cp ${CODET5_DATA}/finetuned_models.tar.gz .
+mkdir finetuned_models
+cp ${CODET5_DATA}/finetuned_models/concode_codet5_base.tar.gz finetuned_models/
 cp ${CODET5_DATA}/data_codecontest.tar.gz .
 cp ${CODET5_DATA}/pretrained_models.tar.gz .
-tar -zxf finetuned_models.tar.gz
+tar -zxf finetuned_models/concode_codet5_base.tar.gz -C finetuned_models/
 tar -zxf data_codecontest.tar.gz
 tar -zxf pretrained_models.tar.gz
 
@@ -32,6 +33,7 @@ cd scripts
 mkdir output
 
 # time python generate_solutions.py ../data/codecontest/code_contests_test.jsonl output/
+# time python generate_solutions.py ../data/codecontest/code_contests_test.jsonl output/ --model_dir ../finetuned_models/concode_codet5_base/
 
 # mkdir -p ${CODET5_EXPERIMENT_SAVE}
 # cp output/ ${CODET5_EXPERIMENT_SAVE}/
