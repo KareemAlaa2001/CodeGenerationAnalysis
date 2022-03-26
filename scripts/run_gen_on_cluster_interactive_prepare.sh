@@ -28,10 +28,10 @@ tar -zxf finetuned_models.tar.gz
 tar -zxf data_codecontest.tar.gz
 tar -zxf pretrained_models.tar.gz
 
-cd sh
+cd scripts
 mkdir output
 
-# python run_exp.py --model_tag codet5_small --task concode --sub_task none
+# time python generate_solutions.py ../data/codecontest/code_contests_test.jsonl output/
 
 # mkdir -p ${CODET5_EXPERIMENT_SAVE}
 # cp output/ ${CODET5_EXPERIMENT_SAVE}/
